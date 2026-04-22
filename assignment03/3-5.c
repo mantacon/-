@@ -2,13 +2,12 @@
 #include<math.h>
 
 #define M_PI 3.14159265358979323846
+#define vecMagnitude(vec) (sqrt(vec.x*vec.x+vec.y*vec.y+vec.z*vec.z))
 typedef struct{
     int x;
     int y;
     int z;
 }strVec;
-
-double vecMagnitude(strVec);
 
 double vecDotProduct(strVec,strVec);
 
@@ -18,10 +17,6 @@ int main(void){
     printf("Vector1:(%d,%d,%d)\n",vec1.x,vec1.y,vec1.z);
     printf("Vector2:(%d,%d,%d)\n",vec2.x,vec2.y,vec2.z);
     printf("É”[deg]=%.6le",acos(vecDotProduct(vec1,vec2)/(vecMagnitude(vec1)*vecMagnitude(vec2)))*180/M_PI);
-}
-
-double vecMagnitude(strVec vec){
-    return sqrt(vec.x*vec.x+vec.y*vec.y+vec.z*vec.z);
 }
 
 double vecDotProduct(strVec vec1,strVec vec2){

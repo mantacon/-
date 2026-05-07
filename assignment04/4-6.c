@@ -23,7 +23,6 @@ printf("enter two natural numbers\n");
 structGCD GCD3(int a, int b) {
     structGCD str1;
 
-    // Šî’êƒP[ƒX: b == 0 ‚Ì‚Æ‚« gcd = a, x = 1, y = 0
     if (b == 0) {
         str1.gcd = a;
         str1.x   = 1;

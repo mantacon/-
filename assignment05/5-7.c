@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include<stdlib.h>
+#include<time.h>
 
 #define N 6
 #define N_DIRECTIONS 8
@@ -119,12 +121,14 @@ int countStones(char board[][N], char player) {
 }
 
 int main() {
+  srand((unsigned int)time(NULL));
   int x, y, piece_type;
   char board[N][N];
   char player = 'B';
   int pass_count = 0;
   initBoard(board);
 
+  printf("BがあなたでWがコンピュータです\n");
   while (pass_count < 2) {
     int can_set_stone = canSetStone(board, player);
     printBoard(board);
@@ -133,19 +137,31 @@ int main() {
       printf("%cのプレイヤー: どこにも石を置けないのでスキップします\n", player);
       pass_count++;
     }
-    else {  
-      int is_feasible;
+    else {
+      int is_feasible = 0;
       pass_count = 0;
-      
-      do {
-	printf("%cのプレイヤー: どこに石を置きますか?\n", player);
-	scanf("%d %d", &x, &y);
+      if(player == 'W'){
+        int x2;
+        int y2;
+        printf("コンピュータのターン\n");
+        while(is_feasible == 0){
+            x2 = rand() % 6;
+            y2 = rand() % 6;
+            is_feasible = isFeasible(board,x2,y2,player);
+        }
+        updateBoard(board, x2, y2, player);
+        }
+      else{
+            do {
+	        printf("あなたのターン: どこに石を置きますか?\n");
+	        scanf("%d %d", &x, &y);
 
-	is_feasible = isFeasible(board, x, y, player);
-	if (!is_feasible) printf("%d, %d には置けません\n", x, y);
-      } while (!is_feasible);
+	        is_feasible = isFeasible(board, x, y, player);
+	        if (!is_feasible) printf("%d, %d には置けません\n", x, y);
+            } while (!is_feasible);
 
-      updateBoard(board, x, y, player);
+            updateBoard(board, x, y, player);
+        }
     }
 
     if (player == 'B') player = 'W';

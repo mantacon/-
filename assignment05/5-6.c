@@ -91,10 +91,10 @@ void updateBoard(char board[][N], int x, int y, char player) {
             if(!(nx >= 0 && nx < N && ny >= 0 && ny < N)) break;
             if(board[nx][ny] == '-') break;
             if(board[nx][ny] == player){
-                for(;;){
+                while(1){
                     nx -= othello_dx[i];
                     ny -= othello_dy[i];
-                    if(!(nx != x || ny != y)) break;
+                    if(nx == x && ny == y) break;
                     if(board[nx][ny] == opponent) board[nx][ny] = player;
                     
                 }
